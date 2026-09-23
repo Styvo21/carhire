@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional car hire and rental service">
+    <title>Mathew Car Hire</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container nav">
+        <div class="logo">
+            <span>MATHEW</span> CAR HIRE
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#cars">Cars</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <button class="admin-btn" onclick="openAdmin()">Admin</button>
+        </nav>
+    </div>
+</header>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <p class="small-title">RELIABLE • AFFORDABLE • CONVENIENT</p>
+
+        <h1>
+            Find the perfect car<br>
+            <span>for your journey.</span>
+        </h1>
+
+        <p>
+            Hire quality vehicles at affordable prices.
+            Choose your preferred car and send your booking request today.
+        </p>
+
+        <a href="#cars" class="hero-btn">
+            Browse Cars
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="search-section">
+
+    <div class="container search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search car by name or type..."
+            onkeyup="displayCars()"
+        >
+
+        <select id="typeFilter" onchange="displayCars()">
+            <option value="">All Types</option>
+            <option value="SUV">SUV</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Van">Van</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Luxury">Luxury</option>
+        </select>
+
+    </div>
+
+</section>
+
+
+<section class="cars-section" id="cars">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <p>OUR FLEET</p>
+            <h2>Cars Available For Hire</h2>
+        </div>
+
+        <div id="carsContainer" class="cars-grid"></div>
+
+        <div id="emptyMessage" class="empty-message">
+            No cars available at the moment.
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="about" id="about">
+
+    <div class="container about-grid">
+
+        <div>
+            <p class="section-label">WHY CHOOSE US</p>
+
+            <h2>
+                Comfortable cars.<br>
+                Reliable service.
+            </h2>
+        </div>
+
+        <div>
+
+            <p>
+                We provide reliable and affordable car hire services
+                for individuals, families, businesses and travelers.
+            </p>
+
+            <div class="features">
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Quality vehicles</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Affordable rates</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Easy booking</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Reliable service</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="contact" id="contact">
+
+    <div class="container">
+
+        <h2>Need a car?</h2>
+
+        <p>
+            Send us your request and we will get back to you.
+        </p>
+
+        <a href="mailto:mathewogato87@gmail.com" class="contact-btn">
+            Email Us
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="container footer-content">
+
+        <div>
+            <h3>MATHEW CAR HIRE</h3>
+            <p>Reliable cars for every journey.</p>
+        </div>
+
+        <div>
+            <p>Email</p>
+            <a href="mailto:mathewogato87@gmail.com">
+                mathewogato87@gmail.com
+            </a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 Mathew Car Hire. All rights reserved.
+    </div>
+
+</footer>
+
+
+<!-- BOOKING MODAL -->
+
+<div id="bookingModal" class="modal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeBooking()">
+            ×
+        </button>
+
+        <h2>Request This Car</h2>
+
+        <p id="selectedCar"></p>
+
+        <form id="bookingForm">
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="customerEmail"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="Phone Number"
+                required
+            >
+
+            <input
+                type="text"
+                id="pickupLocation"
+                placeholder="Pickup Location"
+                required
+            >
+
+            <label>Pickup Date</label>
+
+            <input
+                type="date"
+                id="pickupDate"
+                required
+            >
+
+            <label>Return Date</label>
+
+            <input
+                type="date"
+                id="returnDate"
+                required
+            >
+
+            <textarea
+                id="customerMessage"
+                placeholder="Additional information..."
+                rows="4"
+            ></textarea>
+
+            <button type="submit" class="submit-btn">
+                Send Car Request
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN MODAL -->
+
+<div id="adminModal" class="modal">
+
+    <div class="modal-content admin-content">
+
+        <button class="close" onclick="closeAdmin()">
+            ×
+        </button>
+
+        <h2>Admin Panel</h2>
+
+        <p class="admin-note">
+            Add a vehicle to the website.
+        </p>
+
+        <form id="carForm">
+
+            <input
+                type="text"
+                id="carName"
+                placeholder="Car Name e.g. Toyota Prado"
+                required
+            >
+
+            <select id="carType" required>
+
+                <option value="">Select Type</option>
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Van">Van</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Luxury">Luxury</option>
+
+            </select>
+
+            <input
+                type="number"
+                id="carPrice"
+                placeholder="Price per day (KES)"
+                required
+            >
+
+            <input
+                type="url"
+                id="carImage"
+                placeholder="Car image URL"
+                required
+            >
+
+            <input
+                type="text"
+                id="carSeats"
+                placeholder="Number of seats"
+                required
+            >
+
+            <input
+                type="text"
+                id="carTransmission"
+                placeholder="Transmission e.g. Automatic"
+                required
+            >
+
+            <textarea
+                id="carDescription"
+                placeholder="Car description"
+                rows="3"
+                required
+            ></textarea>
+
+            <button type="submit" class="submit-btn">
+                Add Car
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h3>Manage Cars</h3>
+
+        <div id="adminCars"></div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
